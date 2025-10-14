@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL || "/api",
   timeout: 30000, // 30 seconds timeout for file uploads
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -30,37 +30,37 @@ api.interceptors.response.use(
     if (error.response) {
       // Server responded with error status
       const { status, data } = error.response;
-      
+
       switch (status) {
         case 400:
-          console.error('Bad Request:', data.message);
+          console.error("Bad Request:", data.message);
           break;
         case 401:
-          console.error('Unauthorized:', data.message);
+          console.error("Unauthorized:", data.message);
           break;
         case 404:
-          console.error('Not Found:', data.message);
+          console.error("Not Found:", data.message);
           break;
         case 409:
-          console.error('Conflict:', data.message);
+          console.error("Conflict:", data.message);
           break;
         case 429:
-          console.error('Rate Limited:', data.message);
+          console.error("Rate Limited:", data.message);
           break;
         case 500:
-          console.error('Server Error:', data.message);
+          console.error("Server Error:", data.message);
           break;
         default:
-          console.error('API Error:', data.message);
+          console.error("API Error:", data.message);
       }
     } else if (error.request) {
       // Network error
-      console.error('Network Error:', error.message);
+      console.error("Network Error:", error.message);
     } else {
       // Other error
-      console.error('Error:', error.message);
+      console.error("Error:", error.message);
     }
-    
+
     return Promise.reject(error);
   }
 );
@@ -70,20 +70,20 @@ export const creditReportsAPI = {
   // Upload XML file
   uploadXML: async (file) => {
     const formData = new FormData();
-    formData.append('xmlFile', file);
-    
-    const response = await api.post('/credit-reports/upload', formData, {
+    formData.append("xmlFile", file);
+
+    const response = await api.post("/credit-reports/upload", formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
     });
-    
+
     return response.data;
   },
 
   // Get all credit reports with pagination
   getAllReports: async (params = {}) => {
-    const response = await api.get('/credit-reports', { params });
+    const response = await api.get("/credit-reports", { params });
     return response.data;
   },
 
@@ -114,7 +114,7 @@ export const creditReportsAPI = {
 
 // Health check
 export const healthCheck = async () => {
-  const response = await api.get('/health');
+  const response = await api.get("/health");
   return response.data;
 };
 
