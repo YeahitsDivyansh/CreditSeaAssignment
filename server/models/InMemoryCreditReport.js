@@ -18,7 +18,9 @@ class InMemoryCreditReport {
   }
 
   async findById(id) {
-    return this.reports.get(id) || null;
+    // Convert to string to handle both numeric and string IDs
+    const stringId = id.toString();
+    return this.reports.get(stringId) || null;
   }
 
   async find() {
@@ -41,9 +43,11 @@ class InMemoryCreditReport {
   }
 
   async findByIdAndDelete(id) {
-    const report = this.reports.get(id);
+    // Convert to string to handle both numeric and string IDs
+    const stringId = id.toString();
+    const report = this.reports.get(stringId);
     if (report) {
-      this.reports.delete(id);
+      this.reports.delete(stringId);
       return report;
     }
     return null;

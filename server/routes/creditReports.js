@@ -400,10 +400,14 @@ router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
-    const CreditReportModel = getCreditReportModel();
-    const report = await CreditReportModel.findByIdAndDelete(id);
+    logger.info(`Attempting to delete credit report with ID: ${id}`);
 
-    if (!report) {
+    const CreditReportModel = getCreditReportModel();
+
+    // Try to find the report first to ensure it exists
+    const existingReport = await CreditReportModel.findById(id);
+    if (!existingReport) {
+      logger.warn(`Credit report not found for ID: ${id}`);
       return res.status(404).json({
         success: false,
         message: "Credit report not found",
@@ -411,7 +415,19 @@ router.delete("/:id", async (req, res) => {
       });
     }
 
-    logger.info(`Credit report deleted: ${id}`);
+    // Delete the report
+    const report = await CreditReportModel.findByIdAndDelete(id);
+
+    if (!report) {
+      logger.warn(`Failed to delete credit report with ID: ${id}`);
+      return res.status(404).json({
+        success: false,
+        message: "Credit report not found",
+        error: "REPORT_NOT_FOUND",
+      });
+    }
+
+    logger.info(`Credit report deleted successfully: ${id}`);
 
     res.json({
       success: true,
