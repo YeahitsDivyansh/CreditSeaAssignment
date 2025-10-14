@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CreditReport>
+  <PersonalInfo>
+    <Name>John Doe</Name>
+    <Mobile>9876543210</Mobile>
+    <PAN>ABCDE1234F</PAN>
+  </PersonalInfo>
+  
+  <CreditScore>750</CreditScore>
+  
+  <ReportSummary>
+    <TotalAccounts>5</TotalAccounts>
+    <ActiveAccounts>3</ActiveAccounts>
+    <ClosedAccounts>2</ClosedAccounts>
+    <CurrentBalanceAmount>150000</CurrentBalanceAmount>
+    <SecuredAccountsAmount>100000</SecuredAccountsAmount>
+    <UnsecuredAccountsAmount>50000</UnsecuredAccountsAmount>
+    <RecentEnquiries>1</RecentEnquiries>
+  </ReportSummary>
+  
+  <CreditAccounts>
+    <Account>
+      <AccountNumber>1234567890123456</AccountNumber>
+      <Type>credit_card</Type>
+      <BankName>HDFC Bank</BankName>
+      <CurrentBalance>25000</CurrentBalance>
+      <AmountOverdue>0</AmountOverdue>
+      <CreditLimit>100000</CreditLimit>
+      <Status>active</Status>
+      <OpenedDate>2022-01-15</OpenedDate>
+      <LastPaymentDate>2024-01-15</LastPaymentDate>
+      <EMIAmount>0</EMIAmount>
+    </Account>
+    
+    <Account>
+      <AccountNumber>9876543210987654</AccountNumber>
+      <Type>personal_loan</Type>
+      <BankName>ICICI Bank</BankName>
+      <CurrentBalance>75000</CurrentBalance>
+      <AmountOverdue>0</AmountOverdue>
+      <CreditLimit>0</CreditLimit>
+      <Status>active</Status>
+      <OpenedDate>2023-06-01</OpenedDate>
+      <LastPaymentDate>2024-01-01</LastPaymentDate>
+      <EMIAmount>15000</EMIAmount>
+    </Account>
+    
+    <Account>
+      <AccountNumber>4567891234567890</AccountNumber>
+      <Type>home_loan</Type>
+      <BankName>State Bank of India</BankName>
+      <CurrentBalance>50000</CurrentBalance>
+      <AmountOverdue>0</AmountOverdue>
+      <CreditLimit>0</CreditLimit>
+      <Status>active</Status>
+      <OpenedDate>2021-03-10</OpenedDate>
+      <LastPaymentDate>2024-01-10</LastPaymentDate>
+      <EMIAmount>25000</EMIAmount>
+    </Account>
+    
+    <Account>
+      <AccountNumber>7890123456789012</AccountNumber>
+      <Type>credit_card</Type>
+      <BankName>Axis Bank</BankName>
+      <CurrentBalance>0</CurrentBalance>
+      <AmountOverdue>0</AmountOverdue>
+      <CreditLimit>50000</CreditLimit>
+      <Status>closed</Status>
+      <OpenedDate>2020-08-20</OpenedDate>
+      <LastPaymentDate>2023-12-20</LastPaymentDate>
+      <EMIAmount>0</EMIAmount>
+    </Account>
+    
+    <Account>
+      <AccountNumber>3456789012345678</AccountNumber>
+      <Type>auto_loan</Type>
+      <BankName>Kotak Mahindra Bank</BankName>
+      <CurrentBalance>0</CurrentBalance>
+      <AmountOverdue>0</AmountOverdue>
+      <CreditLimit>0</CreditLimit>
+      <Status>closed</Status>
+      <OpenedDate>2019-11-05</OpenedDate>
+      <LastPaymentDate>2023-11-05</LastPaymentDate>
+      <EMIAmount>0</EMIAmount>
+    </Account>
+  </CreditAccounts>
+  
+  <Addresses>
+    <Address>
+      <Type>current</Type>
+      <Address>123 Main Street, Apartment 4B</Address>
+      <City>Mumbai</City>
+      <State>Maharashtra</State>
+      <Pincode>400001</Pincode>
+      <Country>India</Country>
+    </Address>
+    
+    <Address>
+      <Type>previous</Type>
+      <Address>456 Park Avenue, Flat 2A</Address>
+      <City>Delhi</City>
+      <State>Delhi</State>
+      <Pincode>110001</Pincode>
+      <Country>India</Country>
+    </Address>
+  </Addresses>
+</CreditReport>

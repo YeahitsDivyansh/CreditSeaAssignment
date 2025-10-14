@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CreditReport>
+  <PersonalInfo>
+    <Name>Jane Smith</Name>
+    <Mobile>9876543211</Mobile>
+    <PAN>ABCDE1234G</PAN>
+  </PersonalInfo>
+  
+  <CreditScore>680</CreditScore>
+  
+  <ReportSummary>
+    <TotalAccounts>3</TotalAccounts>
+    <ActiveAccounts>2</ActiveAccounts>
+    <ClosedAccounts>1</ClosedAccounts>
+    <CurrentBalanceAmount>85000</CurrentBalanceAmount>
+    <SecuredAccountsAmount>60000</SecuredAccountsAmount>
+    <UnsecuredAccountsAmount>25000</UnsecuredAccountsAmount>
+    <RecentEnquiries>2</RecentEnquiries>
+  </ReportSummary>
+  
+  <CreditAccounts>
+    <Account>
+      <AccountNumber>1111222233334444</AccountNumber>
+      <Type>credit_card</Type>
+      <BankName>SBI Card</BankName>
+      <CurrentBalance>15000</CurrentBalance>
+      <AmountOverdue>2500</AmountOverdue>
+      <CreditLimit>75000</CreditLimit>
+      <Status>active</Status>
+      <OpenedDate>2023-02-14</OpenedDate>
+      <LastPaymentDate>2024-01-14</LastPaymentDate>
+      <EMIAmount>0</EMIAmount>
+    </Account>
+    
+    <Account>
+      <AccountNumber>5555666677778888</AccountNumber>
+      <Type>personal_loan</Type>
+      <BankName>Bajaj Finserv</BankName>
+      <CurrentBalance>70000</CurrentBalance>
+      <AmountOverdue>0</AmountOverdue>
+      <CreditLimit>0</CreditLimit>
+      <Status>active</Status>
+      <OpenedDate>2023-09-01</OpenedDate>
+      <LastPaymentDate>2024-01-01</LastPaymentDate>
+      <EMIAmount>12000</EMIAmount>
+    </Account>
+    
+    <Account>
+      <AccountNumber>9999000011112222</AccountNumber>
+      <Type>credit_card</Type>
+      <BankName>American Express</BankName>
+      <CurrentBalance>0</CurrentBalance>
+      <AmountOverdue>0</AmountOverdue>
+      <CreditLimit>100000</CreditLimit>
+      <Status>closed</Status>
+      <OpenedDate>2021-12-01</OpenedDate>
+      <LastPaymentDate>2023-11-30</LastPaymentDate>
+      <EMIAmount>0</EMIAmount>
+    </Account>
+  </CreditAccounts>
+  
+  <Addresses>
+    <Address>
+      <Type>current</Type>
+      <Address>789 Oak Street, House No. 15</Address>
+      <City>Bangalore</City>
+      <State>Karnataka</State>
+      <Pincode>560001</Pincode>
+      <Country>India</Country>
+    </Address>
+    
+    <Address>
+      <Type>permanent</Type>
+      <Address>321 Pine Avenue, Villa 7</Address>
+      <City>Chennai</City>
+      <State>Tamil Nadu</State>
+      <Pincode>600001</Pincode>
+      <Country>India</Country>
+    </Address>
+  </Addresses>
+</CreditReport>
