@@ -19,12 +19,6 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Create logs directory if it doesn't exist
-const logsDir = path.join(__dirname, "logs");
-if (!fs.existsSync(logsDir)) {
-  fs.mkdirSync(logsDir, { recursive: true });
-}
-
 // Configure logger
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || "info",
@@ -35,13 +29,6 @@ const logger = winston.createLogger({
   ),
   defaultMeta: { service: "credit-sea-api" },
   transports: [
-    new winston.transports.File({
-      filename: path.join(logsDir, "error.log"),
-      level: "error",
-    }),
-    new winston.transports.File({
-      filename: path.join(logsDir, "combined.log"),
-    }),
     new winston.transports.Console({
       format: winston.format.combine(
         winston.format.colorize(),

@@ -1,23 +1,24 @@
-import multer from 'multer';
-import path from 'path';
-import winston from 'winston';
+import multer from "multer";
+import path from "path";
+import winston from "winston";
 
 // Configure logger
 const logger = winston.createLogger({
-  level: 'info',
+  level: "info",
   format: winston.format.combine(
     winston.format.timestamp(),
     winston.format.errors({ stack: true }),
     winston.format.json()
   ),
-  defaultMeta: { service: 'upload-middleware' },
+  defaultMeta: { service: "upload-middleware" },
   transports: [
-    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'logs/combined.log' }),
     new winston.transports.Console({
-      format: winston.format.simple()
-    })
-  ]
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.simple()
+      ),
+    }),
+  ],
 });
 
 // Configure multer for file uploads
@@ -27,14 +28,14 @@ const storage = multer.memoryStorage();
 const fileFilter = (req, file, cb) => {
   // Check file type
   const allowedMimeTypes = [
-    'application/xml',
-    'text/xml',
-    'application/xml-dtd',
-    'text/plain'
+    "application/xml",
+    "text/xml",
+    "application/xml-dtd",
+    "text/plain",
   ];
-  
-  const allowedExtensions = ['.xml'];
-  
+
+  const allowedExtensions = [".xml"];
+
   // Check MIME type
   if (allowedMimeTypes.includes(file.mimetype)) {
     cb(null, true);
@@ -44,8 +45,8 @@ const fileFilter = (req, file, cb) => {
     if (allowedExtensions.includes(ext)) {
       cb(null, true);
     } else {
-      const error = new Error('Invalid file type. Only XML files are allowed.');
-      error.code = 'INVALID_FILE_TYPE';
+      const error = new Error("Invalid file type. Only XML files are allowed.");
+      error.code = "INVALID_FILE_TYPE";
       cb(error, false);
     }
   }
@@ -57,57 +58,57 @@ const upload = multer({
   fileFilter: fileFilter,
   limits: {
     fileSize: parseInt(process.env.MAX_FILE_SIZE) || 10 * 1024 * 1024, // 10MB default
-    files: 1 // Only allow one file at a time
-  }
+    files: 1, // Only allow one file at a time
+  },
 });
 
 // Middleware to handle file upload
-export const uploadXML = upload.single('xmlFile');
+export const uploadXML = upload.single("xmlFile");
 
 // Error handling middleware for multer
 export const handleUploadError = (error, req, res, next) => {
   if (error instanceof multer.MulterError) {
-    logger.error('Multer error:', error);
-    
+    logger.error("Multer error:", error);
+
     switch (error.code) {
-      case 'LIMIT_FILE_SIZE':
+      case "LIMIT_FILE_SIZE":
         return res.status(400).json({
           success: false,
-          message: 'File too large. Maximum size is 10MB.',
-          error: 'FILE_TOO_LARGE'
+          message: "File too large. Maximum size is 10MB.",
+          error: "FILE_TOO_LARGE",
         });
-      
-      case 'LIMIT_FILE_COUNT':
+
+      case "LIMIT_FILE_COUNT":
         return res.status(400).json({
           success: false,
-          message: 'Too many files. Only one file is allowed.',
-          error: 'TOO_MANY_FILES'
+          message: "Too many files. Only one file is allowed.",
+          error: "TOO_MANY_FILES",
         });
-      
-      case 'LIMIT_UNEXPECTED_FILE':
+
+      case "LIMIT_UNEXPECTED_FILE":
         return res.status(400).json({
           success: false,
           message: 'Unexpected field name. Use "xmlFile" as the field name.',
-          error: 'UNEXPECTED_FIELD'
+          error: "UNEXPECTED_FIELD",
         });
-      
+
       default:
         return res.status(400).json({
           success: false,
-          message: 'File upload error.',
-          error: 'UPLOAD_ERROR'
+          message: "File upload error.",
+          error: "UPLOAD_ERROR",
         });
     }
   }
-  
-  if (error.code === 'INVALID_FILE_TYPE') {
+
+  if (error.code === "INVALID_FILE_TYPE") {
     return res.status(400).json({
       success: false,
       message: error.message,
-      error: 'INVALID_FILE_TYPE'
+      error: "INVALID_FILE_TYPE",
     });
   }
-  
+
   // Pass other errors to the next error handler
   next(error);
 };
@@ -117,23 +118,25 @@ export const validateUploadedFile = (req, res, next) => {
   if (!req.file) {
     return res.status(400).json({
       success: false,
-      message: 'No file uploaded. Please select an XML file.',
-      error: 'NO_FILE'
+      message: "No file uploaded. Please select an XML file.",
+      error: "NO_FILE",
     });
   }
-  
+
   // Check if file has content
   if (req.file.size === 0) {
     return res.status(400).json({
       success: false,
-      message: 'Uploaded file is empty.',
-      error: 'EMPTY_FILE'
+      message: "Uploaded file is empty.",
+      error: "EMPTY_FILE",
     });
   }
-  
+
   // Log successful file upload
-  logger.info(`File uploaded successfully: ${req.file.originalname}, Size: ${req.file.size} bytes`);
-  
+  logger.info(
+    `File uploaded successfully: ${req.file.originalname}, Size: ${req.file.size} bytes`
+  );
+
   next();
 };
 
